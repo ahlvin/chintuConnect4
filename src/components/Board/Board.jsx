@@ -18,13 +18,14 @@ class Board extends Component {
 
   handlePlay = columnIndex => {
     // console.log("handle play implementation");
-
+    let filledColumnStatus = false;
     let { boardDS, message, currentPlayer, gameOver } = { ...this.state };
     if (!gameOver) {
       for (let index = 5; index >= 0; index--) {
         if (boardDS[index][columnIndex] === "0") {
           boardDS[index][columnIndex] =
             currentPlayer === "Player 1" ? "1" : "2";
+          filledColumnStatus = true;
           break;
         }
       }
@@ -40,7 +41,7 @@ class Board extends Component {
           message = (result === "1" ? "Player 1" : "Player 2") + " Wins!!!";
           gameOver = true;
         } else {
-          currentPlayer = togglePlayer(currentPlayer);
+          if (filledColumnStatus) currentPlayer = togglePlayer(currentPlayer);
         }
         // console.log("message", message);
         this.setState({ boardDS, currentPlayer, message, gameOver });
@@ -78,7 +79,7 @@ class Board extends Component {
         <h3
           style={{ textAlign: "center", paddingTop: "10px", color: "#495219" }}
         >
-          Chingu Solo Project - Connect 4
+          Chingu Solo Project - Connect 4 - Vineet
         </h3>
         <div
           style={{
