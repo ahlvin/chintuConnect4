@@ -17,7 +17,7 @@ class Board extends Component {
   }
 
   handlePlay = columnIndex => {
-    console.log("handle play implementation");
+    // console.log("handle play implementation");
 
     let { boardDS, message, currentPlayer, gameOver } = { ...this.state };
     if (!gameOver) {
@@ -30,28 +30,28 @@ class Board extends Component {
       }
 
       let drawStatus = drawValidation(boardDS);
-
+      console.log("darw", drawStatus);
       if (drawStatus) {
         gameOver = true;
         message = "Game Draw";
       } else {
         let result = runAll(boardDS);
         if (result === (currentPlayer === "Player 1" ? "1" : "2")) {
-          message = (result === "1" ? "Player 1" : "Player 2") + " Wins";
+          message = (result === "1" ? "Player 1" : "Player 2") + " Wins!!!";
           gameOver = true;
         } else {
           currentPlayer = togglePlayer(currentPlayer);
         }
-        console.log("message", message);
+        // console.log("message", message);
         this.setState({ boardDS, currentPlayer, message, gameOver });
-        console.log("state", this.state);
+        // console.log("state", this.state);
       }
     }
   };
 
   // init game board
   handleInit = () => {
-    console.log("reload board");
+    // console.log("reload board");
     let { boardDS, message, currentPlayer, gameOver } = { ...this.state };
 
     let dataStruct = Array(6).fill("0");
@@ -68,9 +68,6 @@ class Board extends Component {
   render() {
     let { boardDS, message, currentPlayer, gameOver } = this.state;
     const tableStyle = {
-      width: "600px",
-      height: "500px",
-      margin: "auto",
       background: "#536170",
       color: "#ffff",
       cursor: "pointer"
@@ -83,45 +80,79 @@ class Board extends Component {
         >
           Chingu Solo Project - Connect 4
         </h3>
-        <div style={{ textAlign: "center" }}>
-          <a
-            onClick={this.handleInit}
-            style={{
-              color: "#CCE5CC",
-              background: "#1D2553",
-              padding: "5px 15px",
-              border: "none",
-              cursor: "pointer"
-            }}
-          >
-            Restart Game
-          </a>
-        </div>
-        <div style={{ textAlign: "center" }}>
-          <h3
-          // style={{
-          //   color: currentPlayer === "Player 1" ? "#065535" : "#0B3D91"
-          // }}
-          >
-            {!gameOver ? currentPlayer + " Turn" : "Game Over"}
-          </h3>
-        </div>
-
-        <table style={tableStyle}>
-          <tbody>
-            {boardDS.map((row, i) => (
-              <Row key={i} row={row} play={this.handlePlay} />
-            ))}
-          </tbody>
-        </table>
-        <h3
+        <div
           style={{
-            textAlign: "center",
-            paddingBottom: "10px"
+            display: "flex",
+            height: "400px",
+            justifyContent: "center"
           }}
         >
-          {message}
-        </h3>
+          <div style={{ padding: "0px 20px" }}>
+            <div style={{ color: "#0099CC" }}>
+              <h3 style={{ wordWrap: "break-word" }}>
+                {!gameOver ? currentPlayer + " Playing" : message + ""}
+              </h3>
+            </div>
+            <div style={{ paddingTop: "30px" }} />
+            <div style={{ display: "flex" }}>
+              <div>
+                <h3 style={rowStyle11} />
+              </div>
+              <div>
+                <h3
+                  style={{
+                    textAlign: "center",
+                    margin: "0",
+                    paddingLeft: "7px"
+                  }}
+                >
+                  Player 1
+                </h3>
+              </div>
+            </div>
+            <div style={{ paddingTop: "20px" }} />
+            <div style={{ display: "flex" }}>
+              <div>
+                <h3 style={rowStyle21} />
+              </div>
+              <div>
+                <h3
+                  style={{
+                    textAlign: "center",
+                    margin: "0",
+                    paddingLeft: "7px"
+                  }}
+                >
+                  Player 2
+                </h3>
+              </div>
+            </div>
+            <div style={{ paddingTop: "60px" }} />
+            <div style={{ textAlign: "center", paddingBottom: "20px" }}>
+              <a
+                onClick={this.handleInit}
+                style={{
+                  color: "#CCE5CC",
+                  background: "#1D2553",
+                  padding: "5px 15px",
+                  border: "none",
+                  cursor: "pointer"
+                }}
+              >
+                Restart Game
+              </a>
+            </div>
+          </div>
+          <div style={{}}>
+            <table style={tableStyle}>
+              <tbody>
+                {boardDS.map((row, i) => (
+                  <Row key={i} row={row} play={this.handlePlay} />
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     );
   }
@@ -176,6 +207,25 @@ const rowStyle2 = {
   background: "#0B3D91",
   width: "50px",
   height: "50px",
+  borderRadius: "50%",
+  margin: "auto",
+  textAlign: "center"
+};
+const rowStyle11 = {
+  background: "#065535",
+  width: "40px",
+  height: "40px",
+  color: "#fff",
+  textAlign: "center",
+  borderRadius: "50%",
+  margin: "auto",
+  textAlign: "center"
+};
+const rowStyle21 = {
+  background: "#0B3D91",
+  width: "40px",
+  height: "40px",
+  color: "#fff",
   borderRadius: "50%",
   margin: "auto",
   textAlign: "center"
