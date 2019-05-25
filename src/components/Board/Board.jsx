@@ -31,7 +31,7 @@ class Board extends Component {
       }
 
       let drawStatus = drawValidation(boardDS);
-      console.log("darw", drawStatus);
+      // console.log("darw", drawStatus);
       if (drawStatus) {
         gameOver = true;
         message = "Game Draw";
@@ -96,9 +96,7 @@ class Board extends Component {
             </div>
             <div style={{ paddingTop: "30px" }} />
             <div style={{ display: "flex" }}>
-              <div>
-                <h3 style={rowStyle11} />
-              </div>
+              <div style={rowStyle11} />
               <div>
                 <h3
                   style={{
@@ -113,9 +111,7 @@ class Board extends Component {
             </div>
             <div style={{ paddingTop: "20px" }} />
             <div style={{ display: "flex" }}>
-              <div>
-                <h3 style={rowStyle21} />
-              </div>
+              <div style={rowStyle21} />
               <div>
                 <h3
                   style={{
@@ -130,7 +126,7 @@ class Board extends Component {
             </div>
             <div style={{ paddingTop: "60px" }} />
             <div style={{ textAlign: "center", paddingBottom: "20px" }}>
-              <a
+              <button
                 onClick={this.handleInit}
                 style={{
                   color: "#CCE5CC",
@@ -141,7 +137,7 @@ class Board extends Component {
                 }}
               >
                 Restart Game
-              </a>
+              </button>
             </div>
           </div>
           <div style={{}}>
@@ -219,8 +215,7 @@ const rowStyle11 = {
   color: "#fff",
   textAlign: "center",
   borderRadius: "50%",
-  margin: "auto",
-  textAlign: "center"
+  margin: "auto"
 };
 const rowStyle21 = {
   background: "#0B3D91",
